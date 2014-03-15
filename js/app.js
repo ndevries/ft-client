@@ -30,6 +30,10 @@ angular.module('app', [
         templateUrl: 'views/nuggets.html',
         controller: 'NuggetCtrl'
     })
+    .when('/test', {
+        templateUrl: 'views/test.html',
+        controller: 'TestCtrl'
+    })
     .when('/404', {
         templateUrl: 'views/404.html'
     })
@@ -37,10 +41,14 @@ angular.module('app', [
 
 })
 
-.run(function($location, User) {
+.run(function($location, $rootScope, Auth) {
 
-    if (!User.auth) {
-        $location.path('/login');
-    }
+    $rootScope.$on('$routeChangeStart', function(event, next, current) {
+
+        if (!Auth.check) {
+            $location.path('/login');
+        }
+
+    });
 
 });
