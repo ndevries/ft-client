@@ -15,16 +15,24 @@ angular.module('app', [
 .config(function($routeProvider) {
 
     $routeProvider.when('/', {
-        templateUrl: 'views/home.html',
-        controller: 'HomeCtrl'
+        templateUrl: 'views/dashboard.html',
+        controller: 'DashboardCtrl'
     })
     .when('/login', {
         templateUrl: 'views/login.html',
         controller: 'LoginCtrl'
     })
+    .when('/logout', {
+        template: '',
+        controller: 'LogoutCtrl'
+    })
     .when('/users', {
-        templateUrl: 'views/users.html',
+        templateUrl: 'views/users/index.html',
         controller: 'UserCtrl'
+    })
+    .when('/users/create', {
+        templateUrl: 'views/users/create.html',
+        controller: 'UserCreateCtrl'
     })
     .when('/nuggets/:slug', {
         templateUrl: 'views/nuggets.html',

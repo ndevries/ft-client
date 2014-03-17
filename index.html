@@ -14,7 +14,7 @@
     <script src="js/services.js"></script>
     <script src="js/controllers.js"></script>
 
-    <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="bower_components/bootflatv2/css/site.min.css" rel="stylesheet" />
     <link href="bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
     <link href="bower_components/angular-loading-bar/build/loading-bar.min.css" rel="stylesheet" />
     <link href="css/custom.css" rel="stylesheet" />
@@ -24,9 +24,9 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
     <![endif]-->
 </head>
-<body ng-controller="MainCtrl">
+<body>
     <div ng-controller="HeaderCtrl">
-        <nav class="navbar navbar-default navbar-static-top" role="navigation" ng-show="header.state">
+        <nav class="navbar navbar-inverse navbar-static-top" role="navigation" ng-show="header.state">
             <div class="container-fluid">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
@@ -35,13 +35,14 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#/">{{ client }}</a>
+                    <a class="navbar-brand" href="#/">{{ client.name }}</a>
                 </div>
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                    <ul class="nav navbar-nav navbar-right" ng-show="items">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="#/">Dashboard</a></li>
                         <li><a href="#/users">Users</a></li>
-                        <li ng-repeat="item in items"><a href="#/nuggets/{{ item.slug }}">{{ item.title }}</a></li>
-                        <li><a href="#/settings">Options</a></li>
+                        <li ng-repeat="link in nav.links"><a href="#/nuggets/{{ link.slug }}">{{ link.title }}</a></li>
+                        <li><a href="#/logout">Logout</a></li>
                     </ul>
                 </div>
             </div>
