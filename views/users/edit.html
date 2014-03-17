@@ -1,0 +1,36 @@
+<h1>Edit user</h1>
+<div class="alert alert-success" ng-show="success">{{ success }}</div>
+<div class="alert alert-danger" ng-show="error">{{ error }}</div>
+<div class="alert alert-danger" ng-show="errors">
+    <span ng-repeat="error in errors">{{ error }} </span>
+</div>
+<form ng-submit="update()" ng-show="user">
+    <div class="form-group">
+        <label>Email</label>
+        <input type="text" class="form-control" value="{{ user.email }}" disabled>
+    </div>
+    <div class="form-group">
+        <label>Roles</label>
+        <select ng-model="role" class="form-control">
+            <option ng-repeat="role in roles" value="{{ role.id }}">{{ role.title }}</option>
+        </select>
+    </div>
+    <h4 ng-show="user.user_meta">Custom data</h4>
+    <div ng-repeat="meta in user.user_meta">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label>Key</label>
+                    <input type="text" class="form-control" ng-model="meta.key">
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label>Value</label>
+                    <textarea rows="3" class="form-control" ng-model="meta.value"></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Save user</button>
+</form>

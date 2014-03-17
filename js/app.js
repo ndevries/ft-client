@@ -1,5 +1,6 @@
 angular.module('app', [
     'ngRoute',
+    'ngAnimate',
     'app.controllers',
     'app.services',
     'chieffancypants.loadingBar',
@@ -34,8 +35,16 @@ angular.module('app', [
         templateUrl: 'views/users/create.html',
         controller: 'UserCreateCtrl'
     })
+    .when('/users/:id', {
+        templateUrl: 'views/users/show.html',
+        controller: 'UserShowCtrl'
+    })
+    .when('/users/:id/edit', {
+        templateUrl: 'views/users/edit.html',
+        controller: 'UserEditCtrl'
+    })
     .when('/nuggets/:slug', {
-        templateUrl: 'views/nuggets.html',
+        templateUrl: 'views/nuggets/index.html',
         controller: 'NuggetCtrl'
     })
     .when('/test', {

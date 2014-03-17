@@ -88,6 +88,46 @@ angular.module('app.controllers', [])
                 .success(function(data) {
                     $scope.errors = '';
                     $scope.success = 'User added.';
+                    $scope.user = {};
+                    $scope.confirm = '';
+                })
+                .error(function(data) {
+                    $scope.success = '';
+                    $scope.errors = data;
+                });
+        } else {
+            $scope.errors = '';
+            $scope.success = '';
+            $scope.error = 'Passwords must match.';
+        }
+
+    };
+
+})
+
+.controller('UserEditCtrl', function($scope, $routeParams, User, Role) {
+
+    Role.get()
+        .success(function(data) {
+            $scope.roles = data;
+        })
+
+    User.show($routeParams.id)
+        .success(function(data) {
+            $scope.user = data;
+            $scope.error = data;
+        });
+
+    $scope.create = function() {
+
+        if ($scope.user.password == $scope.confirm) {
+            $scope.error = '';
+            User.save($scope.user)
+                .success(function(data) {
+                    $scope.errors = '';
+                    $scope.success = 'User added.';
+                    $scope.user = {};
+                    $scope.confirm = '';
                 })
                 .error(function(data) {
                     $scope.success = '';
@@ -101,7 +141,13 @@ angular.module('app.controllers', [])
 
 })
 
-.controller('NuggetCtrl', function($scope, $http, $routeParams, Nugget) {
+.controller('UserShowCtrl', function($scope, $routeParams, User) {
+
+    //
+
+})
+
+.controller('NuggetCtrl', function($scope, $routeParams, Nugget) {
 
     function reverseSlug(str) {
         return str.substr(0, 1).toUpperCase() + str.substr(1);

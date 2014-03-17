@@ -1,8 +1,8 @@
 angular.module('app.services', [])
 
-.service('API', function() {
+.service('Config', function() {
 
-    //
+    this.url = 'http://localhost:8080/';
 
 })
 
@@ -60,13 +60,13 @@ angular.module('app.services', [])
 
 })
 
-.service('Auth', function($http) {
+.service('Auth', function($http, Config) {
 
     this.attempt = function(user) {
 
         return $http({
             method: 'POST',
-            url: 'http://localhost:8080/api/login',
+            url: Config.url + 'login',
             headers: {'Content-Type' : 'application/x-www-form-urlencoded'},
             data: user
         });
@@ -79,45 +79,58 @@ angular.module('app.services', [])
 
 })
 
-.service('User', function($http, Auth) {
+.service('User', function($http, Auth, Config) {
 
     this.get = function(type) {
 
-        return $http.get('http://localhost:8080/api/users?secret=' + Auth.get.client.secret);
+        return $http.get(Config.url + 'users?secret=' + Auth.get.client.secret);
 
     };
 
+    this.show = function(id) {
+        return $http.get(Config.url + 'users/' + id + '?secret=' + Auth.get.client.secret);
+    };
 
     this.save = function(user) {
         return $http({
             method: 'POST',
-            url: 'http://localhost:8080/api/users?secret=key1',
+            url: Config.url + 'users?secret=' + Auth.get.client.secret,
             headers: {'Content-Type' : 'application/x-www-form-urlencoded'},
             data: user
         });
     };
 
     this.destroy = function(id) {
-        return $http.delete('http://localhost:8080/api/users/' + id + '?secret=' + Auth.get.client.secret);
+        return $http.delete(Config.url + 'users/' + id + '?secret=' + Auth.get.client.secret);
     };
 
 })
 
-.service('Nugget', function($http, Auth) {
+.service('Nugget', function($http, Auth, Config) {
 
     this.get = function(type) {
 
-        return $http.get('http://localhost:8080/api/nugget_types/' + type + '?secret=' + Auth.get.client.secret);
+        return $http.get(Config.url + 'nugget_types/' + type + '?secret=' + Auth.get.client.secret);
 
     };
 
 })
 
-.service('NuggetType', function($http, Auth) {
+.service('NuggetType', function($http, Auth, Config) {
 
     this.get = function() {
 
-        return $http.get('http://localhost:8080/api/nugget_types?secret=' + Auth.get.client.secret);
+        return $http.get(Config.url + 'nugget_types?secret=' + Auth.get.client.secret);
+
+    };
+
+})
+
+.service('Role', function($http, Auth, Config) {
+
+    this.get = function() {
+
+        return $http.get(Config.url + 'roles?secret=' + Auth.get.client.secret);
 
     };
 
