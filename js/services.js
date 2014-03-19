@@ -83,25 +83,25 @@ angular.module('app.services', [])
 
     this.get = function(type) {
 
-        return $http.get(Config.url + 'users?secret=' + Auth.get.client.secret);
+        return $http.get(Config.url + 'users?client=' + Auth.get.client.id);
 
     };
 
     this.show = function(id) {
-        return $http.get(Config.url + 'users/' + id + '?secret=' + Auth.get.client.secret);
+        return $http.get(Config.url + 'users/' + id + '?client=' + Auth.get.client.id);
     };
 
     this.save = function(user) {
         return $http({
             method: 'POST',
-            url: Config.url + 'users?secret=' + Auth.get.client.secret,
+            url: Config.url + 'users?client=' + Auth.get.client.id,
             headers: {'Content-Type' : 'application/x-www-form-urlencoded'},
             data: user
         });
     };
 
     this.destroy = function(id) {
-        return $http.delete(Config.url + 'users/' + id + '?secret=' + Auth.get.client.secret);
+        return $http.delete(Config.url + 'users/' + id + '?client=' + Auth.get.client.id);
     };
 
 })
@@ -110,17 +110,17 @@ angular.module('app.services', [])
 
     this.get = function(type) {
 
-        return $http.get(Config.url + 'nugget_types/' + type + '?secret=' + Auth.get.client.secret);
+        return $http.get(Config.url + 'chunks/' + type + '?client=' + Auth.get.client.id);
 
     };
 
 })
 
-.service('NuggetType', function($http, Auth, Config) {
+.service('Chunk', function($http, Auth, Config) {
 
     this.get = function() {
 
-        return $http.get(Config.url + 'nugget_types?secret=' + Auth.get.client.secret);
+        return $http.get(Config.url + 'chunks?client=' + Auth.get.client.id);
 
     };
 
@@ -130,7 +130,7 @@ angular.module('app.services', [])
 
     this.get = function() {
 
-        return $http.get(Config.url + 'roles?secret=' + Auth.get.client.secret);
+        return $http.get(Config.url + 'roles?client=' + Auth.get.client.id);
 
     };
 

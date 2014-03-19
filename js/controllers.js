@@ -8,7 +8,7 @@ angular.module('app.controllers', [])
 
 })
 
-.controller('LoginCtrl', function($scope, $location, Auth, Header, NuggetType) {
+.controller('LoginCtrl', function($scope, $location, Auth, Header, Chunk) {
 
     $scope.user = {};
     $scope.user.email = localStorage['email'];
@@ -21,7 +21,7 @@ angular.module('app.controllers', [])
                 Auth.check = true;
                 Auth.get = data;
                 Header.setTitle(Auth.get.client.name);
-                NuggetType.get()
+                Chunk.get()
                     .success(function(data) {
                         Header.setLinks(data);
                         Header.show();
@@ -31,9 +31,11 @@ angular.module('app.controllers', [])
                     });
                 localStorage['email'] = $scope.user.email;
                 $location.path('/');
+                $scope.user.password = '';
             })
             .error(function(data) {
                 $scope.message = data;
+                $scope.user.password = '';
             });
 
     };

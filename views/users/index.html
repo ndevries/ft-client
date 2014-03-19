@@ -22,7 +22,7 @@
                             <span ng-repeat="role in user.roles">{{ role.title }}{{ $last ? '' : ', ' }}</span>
                         </td>
                         <td>{{ user.created_at }}</td>
-                        <td><a href="#/users/{{ user.id }}/edit" title="Edit user"><i class="fa fa-edit"></i></a> <a href="" ng-click="remove(user.id)" title="Remove user"><i class="fa fa-trash-o"></i></a></td>
+                        <td class="text-right"><a href="#/users/{{ user.id }}/edit" title="Edit user"><i class="fa fa-edit"></i></a> <a href="" ng-click="remove(user.id)" title="Remove user"><i class="fa fa-trash-o"></i></a></td>
                     </tr>
                 </tbody>
             </table>
