@@ -1,10 +1,18 @@
 angular.module('app.controllers', [])
 
-.controller('HeaderCtrl', function($scope, Header) {
+.controller('HeaderCtrl', function($scope, $location, Header) {
 
     $scope.client = Header.title();
     $scope.header = Header.get();
     $scope.nav    = Header.links();
+
+    $scope.isActive = function (viewLocation) {
+        return viewLocation === $location.path();
+    };
+
+    $scope.change = function(page) {
+        Header.setCurrent(page);
+    };
 
 })
 
@@ -117,7 +125,6 @@ angular.module('app.controllers', [])
     User.show($routeParams.id)
         .success(function(data) {
             $scope.user = data;
-            $scope.error = data;
         });
 
     $scope.create = function() {
@@ -149,17 +156,16 @@ angular.module('app.controllers', [])
 
 })
 
-.controller('NuggetCtrl', function($scope, $routeParams, Nugget) {
+.controller('NuggetCtrl', function($scope, $routeParams, $location, Nugget, Header) {
 
-    function reverseSlug(str) {
-        return str.substr(0, 1).toUpperCase() + str.substr(1);
-    }
+    $scope.page = Header.current().page;
 
-    $scope.page = reverseSlug($routeParams.slug);
-
-    Nugget.get($scope.page)
+    Nugget.get($routeParams.id)
         .success(function(data) {
             $scope.nuggets = data;
+        })
+        .error(function(data) {
+            $location.path('/404');
         });
 
 })

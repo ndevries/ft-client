@@ -27,7 +27,7 @@
 </head>
 <body>
     <div ng-controller="HeaderCtrl">
-        <nav class="navbar navbar-inverse navbar-static-top animate-show" role="navigation" ng-show="header.state">
+        <nav class="navbar navbar-inverse navbar-static-top fade" role="navigation" ng-show="header.state">
             <div class="container-fluid">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
@@ -40,9 +40,9 @@
                 </div>
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="#/">Dashboard</a></li>
-                        <li><a href="#/users">Users</a></li>
-                        <li ng-repeat="link in nav.links"><a href="#/nuggets/{{ link.slug }}">{{ link.title }}</a></li>
+                        <li ng-class="{ active: isActive('/')}"><a href="#/">Dashboard</a></li>
+                        <li ng-class="{ active: isActive('/users')}"><a href="#/users">Users</a></li>
+                        <li ng-repeat="link in nav.links" ng-class="{ active: isActive('/nuggets/' + link.id)}"><a href="#/nuggets/{{ link.id }}" ng-click="change(link.title)">{{ link.title }}</a></li>
                         <li><a href="#/logout">Logout</a></li>
                     </ul>
                 </div>
@@ -50,7 +50,7 @@
         </nav>
     </div>
     <div class="container">
-        <div ng-view></div>
+        <div ng-view class="slide"></div>
     </div>
 </body>
 </html>

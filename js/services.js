@@ -20,6 +20,10 @@ angular.module('app.services', [])
         links: []
     };
 
+    var active = {
+        page: ''
+    };
+
     return {
 
         get: function() {
@@ -50,9 +54,18 @@ angular.module('app.services', [])
             nav.links = newLinks;
         },
 
+        current: function() {
+            return active;
+        },
+
+        setCurrent: function(newCurrent) {
+            active.page = newCurrent;
+        },
+
         reset: function() {
             nav.links    = [];
             client.name  = '';
+            page.current = '';
             header.state = false;
         }
 
@@ -108,9 +121,9 @@ angular.module('app.services', [])
 
 .service('Nugget', function($http, Auth, Config) {
 
-    this.get = function(type) {
+    this.get = function(id) {
 
-        return $http.get(Config.url + 'chunks/' + type + '?client=' + Auth.get.client.id);
+        return $http.get(Config.url + 'chunks/' + id + '?client=' + Auth.get.client.id);
 
     };
 

@@ -43,7 +43,7 @@ angular.module('app', [
         templateUrl: 'views/users/edit.html',
         controller: 'UserEditCtrl'
     })
-    .when('/nuggets/:slug', {
+    .when('/nuggets/:id', {
         templateUrl: 'views/nuggets/index.html',
         controller: 'NuggetCtrl'
     })
